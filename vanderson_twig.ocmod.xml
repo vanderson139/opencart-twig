@@ -1,0 +1,46 @@
+<modification>
+    <name>Twig Template Engine - OCMOD</name>
+    <version>1.0</version>
+    <author>Vanderson Lopes</author>
+    <code>vanderson_twig_ocmod</code>
+
+    <file path="system/engine/loader.php">
+        <operation info="Twig Render">
+            <search index="0">
+                <![CDATA[public function view($template, $data = array()) {]]>
+            </search>
+            <add position="before">
+                <![CDATA[
+    // Twig for Opencart
+    public function twig($template, $data = array()) {
+        if( ! $this->twig) {
+
+            $this->library('twig');
+
+            Twig_Autoloader::register();
+
+            $paths[] = DIR_TEMPLATE . $this->config->get('config_template') . '/template';
+            $paths[] = DIR_TEMPLATE . 'default/template';
+            $paths[] = DIR_TEMPLATE;
+
+            $loader = new Twig_Loader_Filesystem($paths);
+
+            $cache = false;
+
+            if(defined('TWIG_CACHE')) {
+                $cache = TWIG_CACHE;
+            }
+
+            $this->twig = new Twig_Environment($loader,array(
+                'autoescape' => false,
+                'cache' => $cache
+            ));
+        }
+
+        return $this->twig->render($template,$data);
+    }
+]]>
+            </add>
+        </operation>
+    </file> 
+</modification>
