@@ -12,7 +12,7 @@
             <add position="before">
                 <![CDATA[
     // Twig for Opencart
-    public function view($template, $data = array()) {
+    public function twig($template, $data = array()) {
         if( ! $this->twig) {
 
             $this->library('twig');
