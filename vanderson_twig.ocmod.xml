@@ -1,6 +1,6 @@
 <modification>
     <name>Twig Template Engine - OCMOD</name>
-    <version>1.1</version>
+    <version>1.1.1</version>
     <author>Vanderson Lopes</author>
     <code>vanderson_twig_ocmod</code>
 
@@ -13,7 +13,7 @@
                 <![CDATA[
     // Twig for Opencart
     public function twig($template, $data = array()) {
-        if( ! $this->twig) {
+        if( ! $this->registry->get('twig')) {
 
             $this->library('twig');
 
@@ -37,17 +37,17 @@
                 $cache = TWIG_CACHE;
             }
 
-            $this->twig = new Twig_Environment($loader,array(
+            $this->registry->set('twig',new Twig_Environment($loader,array(
                 'autoescape' => false,
                 'cache' => $cache
-            ));
+            )));
         }
 
         extract($data);
         ob_start();
 
         // First Step - Render Twig Native Templates
-        $output = $this->twig->render($template, $data);
+        $output = $this->registry->get('twig')->render($template, $data);
 
         // Second Step - IF template has PHP Syntax, then execute
         eval(' ?>' . $output);
