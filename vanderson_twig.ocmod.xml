@@ -12,32 +12,36 @@
             <add position="before">
                 <![CDATA[
     // Twig for Opencart
-    public function twig($template, $data = array()) {
-        if( ! $this->twig) {
-
-            $this->library('twig');
-
+    public function twig($template, $data = array())
+    {
+        if (file_exists(DIR_SYSTEM . 'library/Twig/Autoloader.php')) {
+            require_once DIR_SYSTEM . 'library/Twig/Autoloader.php';
             Twig_Autoloader::register();
 
-            $paths[] = DIR_TEMPLATE . $this->config->get('config_template') . '/template';
-            $paths[] = DIR_TEMPLATE . 'default/template';
-            $paths[] = DIR_TEMPLATE;
-
-            $loader = new Twig_Loader_Filesystem($paths);
-
-            $cache = false;
-
-            if(defined('TWIG_CACHE')) {
-                $cache = TWIG_CACHE;
-            }
-
-            $this->twig = new Twig_Environment($loader,array(
+            $twig = new Twig_Environment(new Twig_Loader_String, array(
                 'autoescape' => false,
-                'cache' => $cache
+                'cache'      => DIR_CACHE . 'twig',
             ));
         }
 
-        return $this->twig->render($template,$data);
+        $file = DIR_TEMPLATE . $template;
+
+        if (file_exists($file)) {
+            extract($data);
+
+            ob_start();
+
+            require $file;
+
+            $output = $twig->render(ob_get_contents(), $data);
+
+            ob_end_clean();
+
+            return $output;
+        } else {
+            trigger_error('Error: Could not load template ' . $file . '!');
+            exit();
+        }
     }
 ]]>
             </add>
