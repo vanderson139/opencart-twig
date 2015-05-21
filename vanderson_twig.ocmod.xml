@@ -1,6 +1,6 @@
 <modification>
     <name>Twig Template Engine - OCMOD</name>
-    <version>1.0</version>
+    <version>1.1</version>
     <author>Vanderson Lopes</author>
     <code>vanderson_twig_ocmod</code>
 
@@ -12,15 +12,21 @@
             <add position="before">
                 <![CDATA[
     // Twig for Opencart
-    public function twig($template, $data = array()) {
+    public function view($template, $data = array()) {
         if( ! $this->twig) {
 
             $this->library('twig');
 
             Twig_Autoloader::register();
 
-            $paths[] = DIR_TEMPLATE . $this->config->get('config_template') . '/template';
-            $paths[] = DIR_TEMPLATE . 'default/template';
+            if(is_dir(DIR_TEMPLATE . $this->config->get('config_template') . '/template')) {
+                $paths[] = DIR_TEMPLATE . $this->config->get('config_template') . '/template';
+            }
+
+            if(is_dir(DIR_TEMPLATE . 'default/template')) {
+                $paths[] = DIR_TEMPLATE . 'default/template';
+            }
+
             $paths[] = DIR_TEMPLATE;
 
             $loader = new Twig_Loader_Filesystem($paths);
@@ -37,7 +43,20 @@
             ));
         }
 
-        return $this->twig->render($template,$data);
+        extract($data);
+        ob_start();
+
+        // First Step - Render Twig Native Templates
+        $output = $this->twig->render($template, $data);
+
+        // Second Step - IF template has PHP Syntax, then execute
+        eval(' ?>' . $output);
+
+        $output = ob_get_contents();
+
+        ob_end_clean();
+
+        return $output;
     }
 ]]>
             </add>
