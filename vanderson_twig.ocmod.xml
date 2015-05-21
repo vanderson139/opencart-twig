@@ -11,15 +11,6 @@
             </search>
             <add position="before">
                 <![CDATA[
-    // Magic Methods
-    public function __get($key) {
-        return $this->registry->get($key);
-    }
-
-    public function __set($key, $value) {
-        $this->registry->set($key, $value);
-    }
-
     // Twig for Opencart
     public function twig($template, $data = array()) {
         if( ! $this->twig) {
