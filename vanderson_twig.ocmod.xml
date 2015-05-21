@@ -19,8 +19,8 @@
 
             Twig_Autoloader::register();
 
-            if(is_dir(DIR_TEMPLATE . $this->config->get('config_template') . '/template')) {
-                $paths[] = DIR_TEMPLATE . $this->config->get('config_template') . '/template';
+            if(is_dir(DIR_TEMPLATE . $this->registry->get('config')->get('config_template') . '/template')) {
+                $paths[] = DIR_TEMPLATE . $this->registry->get('config')->get('config_template') . '/template';
             }
 
             if(is_dir(DIR_TEMPLATE . 'default/template')) {
