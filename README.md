@@ -18,8 +18,7 @@ Installation
 
 - Proceed to Extensions > Modifications, and click on the Refresh button located near the top right corner.
 
-- Use <b>$this->load->twig('template_path')</b> instead of $this->load->view('template_path') on controllers to compile with twig 
-(the default engine will continue working)
+- Use <b>$this->load->view('template_path')</b> on controllers to compile with twig, native php templates or both mixed.
 
 - By default, cache is disabled. If you want to use cache, define the path variable on config.php and admin/config.php files:
 
