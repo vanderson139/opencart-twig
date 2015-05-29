@@ -23,3 +23,5 @@ Installation
 - By default, cache is disabled. If you want to use cache, define the path variable on config.php and admin/config.php files:
 
 define('TWIG_CACHE', DIR_CACHE . 'twig');
+
+[![alt tag](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5R4RW3RXRNUR2)
