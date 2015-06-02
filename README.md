@@ -24,4 +24,4 @@ Installation
 
 define('TWIG_CACHE', DIR_CACHE . 'twig');
 
-[![alt tag](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5R4RW3RXRNUR2)
+[![alt tag](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=92R8ND2JM9RBN)
