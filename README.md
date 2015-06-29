@@ -33,47 +33,53 @@ Functions
 
 - link: shortcut for $this->url->link();
 
-{{ link('account/address', {'foo': 'bar', 'another_param': 'another_value', 'SSL'}) }} // https://yourstore.com/index.php?foo=bar&another_param=another_value
+{{ link('account/address', {'foo': 'bar', 'another_param': 'another_value', 'SSL'}) }}
+<i>// https://yourstore.com/index.php?foo=bar&another_param=another_value</i>
 * param 'token' is automaticaly placed
 
 
 - lang: loads the corrensponding language string
 
-{{ lang('text_yes') }} // Yes
+{{ lang('text_yes') }}
+<i>// Yes</i>
 
-{{ lang('text_stock', 'product/product') }} // Availability:
+{{ lang('text_stock', 'product/product') }}
+<i>// Availability:</i>
 
 
 - config: gets config value
 
-{{ config('store_name') }} // Your Store
+{{ config('store_name') }}
+<i>// Your Store</i>
 
-{{ config('custom_config', 'custom_filename') }} // Custom Value loaded from system/config/custom_filename.php
+{{ config('custom_config', 'custom_filename') }}
+<i>// Custom Value loaded from system/config/custom_filename.php</i>
 
 
 - image: Resize the image and return its url
 
-\<img src="{{ image('catalog/Your-image.png') }}" /> // \http://yourstore.com/image/cache/catalog/Your-image-228x228.png
+{{ image('catalog/Your-image.png') }}
+<i>// yourstore.com/image/cache/catalog/Your-image-228x228.png</i>
 * default size from config_image_product_width and config_image_product_height
 
-\<img src="{{ image('catalog/Your-image.png', 'popup') }}" /> // \http://yourstore.com/image/cache/catalog/Your-image-500x500.png
+{{ image('catalog/Your-image.png', 'popup') }}
+<i>// yourstore.com/image/cache/catalog/Your-image-500x500.png</i>
 * size from config_image_popup_width and config_image_popup_height
 
-\<img src="{{ image('catalog/Your-image.png', '', 300, 300) }}" /> // \http://yourstore.com/image/cache/catalog/Your-image-300x300.png
+{{ image('catalog/Your-image.png', '', 300, 300) }}
+<i>// yourstore.com/image/cache/catalog/Your-image-300x300.png</i>
 * custom size
 
 
 - asset: generate link to the file
 
-<script src="{{ asset('javascript/bootstrap.js') }} "></script>
+{{ asset('javascript/bootstrap.js') }}
 * admin or catalog is automaticaly resolved
 
 
 - load: loads a controller
 
-<div class="home-top-block">
-    {{ load('common/content_top') }}
-</div>
+{{ load('common/content_top') }}
 
 
 - paginate: render a pagination view
@@ -84,9 +90,11 @@ Functions
         args
         template
 
-{{ paginate(50, 5, 'product/product', {'foo': 'bar'}) }} // prints default pagination from Pagination->render()
+{{ paginate(50, 5, 'product/product', {'foo': 'bar'}) }}
+<i>// prints default pagination from Pagination->render()</i>
 
-{{ paginate(50, 5, 'product/product', {'foo': 'bar'}, 'custom_template/pagination.twig') }} // custom pagination template
+{{ paginate(50, 5, 'product/product', {'foo': 'bar'}, 'custom_template/pagination.twig') }}
+<i>// custom pagination template</i>
 
 
 // Admin only
@@ -94,14 +102,14 @@ Functions
 - can_access: Check if the logged user can access the resource
 
 {% if can_access('user/user_permission') %}
-    // Can access the users permissions
+    <i>// Can access the users permissions</i>
 {% endif %}
 
 
 - can_modify: Check if the logged user can modify the resource
 
 {% if can_modify('user/user_permission') %}
-    // Can modify the users permissions
+    <i>// Can modify the users permissions</i>
 {% endif %}
 
 
@@ -114,7 +122,8 @@ Filters
         value
         format
 
-{{ product.price|money }} // US$ 15.95
+{{ product.price|money }}
+<i>// US$ 15.95</i>
 
 
 - tax: shortcut for $this->tax->calculate()
@@ -124,26 +133,31 @@ Filters
 
 - len: shortcut for $this->length->format()
 
-{{ product.length|len(product.length_class_id) }} // 20.53cm
+{{ product.length|len(product.length_class_id) }}
+<i>// 20.53cm</i>
 
 
 - wei: shortcut for $this->weight->format()
 
-{{ product.weight|wei(product.weight_class_id) }} // 20.53cm
+{{ product.weight|wei(product.weight_class_id) }}
+<i>// 20.53cm</i>
 
 
 - truncate: limits the text based on config 'config_product_description_length'
 
-{{ product.description|truncate('...', 50) }} // Lacus etiam nec amet accumsan mattis nostra. Curae...
+{{ product.description|truncate('...', 50) }}
+<i>// Lacus etiam nec amet accumsan mattis nostra. Curae...</i>
 
 - encrypt: shortcut for Encryption->encrypt()
 
-{{ 'foo'|encrypt }} // SUEfGT636cD1VNzqs-avGhuKx2w4suvPJ18k9qCYdws,
+{{ 'foo'|encrypt }}
+<i>// SUEfGT636cD1VNzqs-avGhuKx2w4suvPJ18k9qCYdws,</i>
 
 
 - decrypt: shortcut for Encryption->decrypt()
 
-{{ 'SUEfGT636cD1VNzqs-avGhuKx2w4suvPJ18k9qCYdws,'|decrypt }} // foo
+{{ 'SUEfGT636cD1VNzqs-avGhuKx2w4suvPJ18k9qCYdws,'|decrypt }}
+<i>// foo</i>
 
 
 Globals
