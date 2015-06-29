@@ -26,7 +26,7 @@ define('TWIG_CACHE', DIR_CACHE . 'twig');
 
 ## Documentation
 
-**Functions**
+##Functions##
 
 ### link
 Shortcut for $this->url->link();
