@@ -53,13 +53,13 @@ Functions
 
 - image: Resize the image and return its url
 
-\<img src="{{ image('catalog/Your-image.png') }}" /> // http://yourstore.com/image/cache/catalog/Your-image-228x228.png
+\<img src="{{ image('catalog/Your-image.png') }}" /> // \http://yourstore.com/image/cache/catalog/Your-image-228x228.png
 * default size from config_image_product_width and config_image_product_height
 
-\<img src="{{ image('catalog/Your-image.png', 'popup') }}" /> // http://yourstore.com/image/cache/catalog/Your-image-500x500.png
+\<img src="{{ image('catalog/Your-image.png', 'popup') }}" /> // \http://yourstore.com/image/cache/catalog/Your-image-500x500.png
 * size from config_image_popup_width and config_image_popup_height
 
-\<img src="{{ image('catalog/Your-image.png', '', 300, 300) }}" /> // http://yourstore.com/image/cache/catalog/Your-image-300x300.png
+\<img src="{{ image('catalog/Your-image.png', '', 300, 300) }}" /> // \http://yourstore.com/image/cache/catalog/Your-image-300x300.png
 * custom size
 
 
