@@ -284,25 +284,25 @@ Shortcut for Encryption->decrypt()
 
 This variables are accessible in all twig templates
 
-> document_title
-> document_description
-> document_keywords
-> document_links
-> document_styles
-> document_scripts
-> route
-> is_logged
+> * document_title
+> * document_description
+> * document_keywords
+> * document_links
+> * document_styles
+> * document_scripts
+> * route
+> * is_logged
 
 ### Admin Only
 
-> user
+> * user
 
 ### Catalog Only
 
-> customer
-> affiliate
-> is_affiliate_logged
-> cart
+> * customer
+> * affiliate
+> * is_affiliate_logged
+> * cart
 
 
 [![alt tag](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=92R8ND2JM9RBN)
