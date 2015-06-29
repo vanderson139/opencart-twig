@@ -9,8 +9,7 @@ Twig is a modern template engine for PHP
 
 <b>Flexible:</b> Twig is powered by a flexible lexer and parser. This allows the developer to define its own custom tags and filters, and create its own DSL.
 
-Installation
-============
+## Installation
 
 - Upload the folders and files from the 'upload' directory via FTP to your OpenCart server's main directory. <b>No files will be replaced</b>
 
@@ -25,165 +24,285 @@ Installation
 define('TWIG_CACHE', DIR_CACHE . 'twig');
 
 
-Documentation
-=============
+## Documentation
 
-Functions
-=========
+**Functions**
 
-- link: shortcut for $this->url->link();
+### link
+Shortcut for $this->url->link();
 
-{{ link('account/address', {'foo': 'bar', 'another_param': 'another_value', 'SSL'}) }}
-<i>// https://yourstore.com/index.php?foo=bar&another_param=another_value</i>
+> Params:
+
+> * route
+> * args
+> * ssl
+
+```twig
+
+    {{ link('product/product', { 'foo': 'bar' }, 'SSL') }}
+```
+
 * param 'token' is automaticaly placed
 
 
-- lang: loads the corrensponding language string
+## lang
+Loads the corrensponding language string
 
-{{ lang('text_yes') }}
-<i>// Yes</i>
+> Params:
 
-{{ lang('text_stock', 'product/product') }}
-<i>// Availability:</i>
+> * key
+> * file
 
+```twig
 
-- config: gets config value
+    {{ lang('text_yes') }}
 
-{{ config('store_name') }}
-<i>// Your Store</i>
-
-{{ config('custom_config', 'custom_filename') }}
-<i>// Custom Value loaded from system/config/custom_filename.php</i>
+    {{ lang('text_stock', 'product/product') }}
+```
 
 
-- image: Resize the image and return its url
+### config
+Gets config value
 
-{{ image('catalog/Your-image.png') }}
-<i>// yourstore.com/image/cache/catalog/Your-image-228x228.png</i>
-* default size from config_image_product_width and config_image_product_height
+> Params:
 
-{{ image('catalog/Your-image.png', 'popup') }}
-<i>// yourstore.com/image/cache/catalog/Your-image-500x500.png</i>
-* size from config_image_popup_width and config_image_popup_height
-
-{{ image('catalog/Your-image.png', '', 300, 300) }}
-<i>// yourstore.com/image/cache/catalog/Your-image-300x300.png</i>
-* custom size
+> * key
+> * file
 
 
-- asset: generate link to the file
+```twig
 
-{{ asset('javascript/bootstrap.js') }}
-* admin or catalog is automaticaly resolved
+    {{ config('config_name') }}
 
+    {{ config('custom_config', 'custom_file') }}
+```
 
-- load: loads a controller
+### image
+Resize the image and return its url
 
-{{ load('common/content_top') }}
+> Params:
 
+> * path
+> * context
+> * width
+> * height
 
-- paginate: render a pagination view
-    params:
-        total
-        limit
-        route
-        args
-        template
+```twig
 
-{{ paginate(50, 5, 'product/product', {'foo': 'bar'}) }}
-<i>// prints default pagination from Pagination->render()</i>
+    <img src="{{ image('catalog/Your-Image.png') }}" />
 
-{{ paginate(50, 5, 'product/product', {'foo': 'bar'}, 'custom_template/pagination.twig') }}
-<i>// custom pagination template</i>
+    <img src="{{ image('catalog/Your-Image.png', 'thumb') }}" />
 
+```
 
-// Admin only
+### asset
+Generate link to the file
 
-- can_access: Check if the logged user can access the resource
+> Params:
 
-{% if can_access('user/user_permission') %}
-    <i>// Can access the users permissions</i>
-{% endif %}
+> * path
 
+```twig
 
-- can_modify: Check if the logged user can modify the resource
+    <script src="{{ asset('javascript/bootstrap.js') }}" ></script>
 
-{% if can_modify('user/user_permission') %}
-    <i>// Can modify the users permissions</i>
-{% endif %}
+```
 
 
-Filters
-=======
+### load
+Loads a controller
 
-- money: shortcut for $this->currency->format()
-    params:
-        currency
-        value
-        format
+> Params:
 
-{{ product.price|money }}
-<i>// US$ 15.95</i>
+> * path
 
+```twig
 
-- tax: shortcut for $this->tax->calculate()
+    {{ load('common/column_left') }}
 
-{{ product.price|tax(product.tax_class_id) }}
+```
 
 
-- len: shortcut for $this->length->format()
+### paginate
+Render a pagination view
 
-{{ product.length|len(product.length_class_id) }}
-<i>// 20.53cm</i>
+> Params:
+
+> * total
+> * limit
+> * route
+> * args
+> * template
+
+```twig
+
+    {{ paginate(50, 5, 'product/category') }}
+
+    {{ paginate(50, 5, 'product/category', { 'foo': 'bar' }, 'custom_template/pagination.twig') }}
+
+```
+
+## Admin only
+
+### can_access
+Check if the logged user can access the resource
+
+> Params:
+
+> * key
+
+```twig
+
+    {% if can_access('user/user_permission') %}
+
+        {#  Can access this resource  #}
+
+    {% endif %}
+
+```
 
 
-- wei: shortcut for $this->weight->format()
+### can_modify
+Check if the logged user can modify the resource
 
-{{ product.weight|wei(product.weight_class_id) }}
-<i>// 20.53cm</i>
+> Params:
+
+> * key
+
+```twig
+
+    {% if can_modify('user/user_permission') %}
+
+        {# Can modify this resource #}
+
+    {% endif %}
+
+```
+
+## Filters
+
+### money
+Shortcut for $this->currency->format()
+
+> Params:
+
+> * currency
+> * value
+> * format
+
+```twig
+
+    {{ product.price|money }}
+
+```
 
 
-- truncate: limits the text based on config 'config_product_description_length'
+### tax
+Shortcut for $this->tax->calculate()
 
-{{ product.description|truncate('...', 50) }}
-<i>// Lacus etiam nec amet accumsan mattis nostra. Curae...</i>
+> Params:
 
-- encrypt: shortcut for Encryption->encrypt()
+> * tax_class_id
+> * calculate
 
-{{ 'foo'|encrypt }}
-<i>// SUEfGT636cD1VNzqs-avGhuKx2w4suvPJ18k9qCYdws,</i>
+```twig
 
+    {{ product.price|tax(product.tax_class_id) }}
 
-- decrypt: shortcut for Encryption->decrypt()
-
-{{ 'SUEfGT636cD1VNzqs-avGhuKx2w4suvPJ18k9qCYdws,'|decrypt }}
-<i>// foo</i>
+```
 
 
-Globals
-=======
+### len
+Shortcut for $this->length->format()
+
+> Params:
+
+> * length_class_id
+> * decimal_point
+> * thousand_point
+
+```twig
+
+    {{ product.length|len(product.length_class_id) }}
+
+```
+
+
+### wei
+Shortcut for $this->weight->format()
+
+> Params:
+
+> * weight_class_id
+> * decimal_point
+> * thousand_point
+
+```twig
+
+    {{ product.weight|wei(product.weight_class_id) }}
+
+```
+
+
+### truncate
+Limits the text based on config 'config_product_description_length'
+
+> Params:
+
+> * suffix
+> * limit
+
+```twig
+
+    {{ product.description|truncate('...', 50) }}
+
+```
+
+
+### encrypt
+Shortcut for Encryption->encrypt()
+
+```twig
+
+    {{ 'foo'|encrypt }}
+
+```
+
+
+### decrypt
+Shortcut for Encryption->decrypt()
+
+
+```twig
+
+    {{ 'SUEfGT636cD1VNzqs-avGhuKx2w4suvPJ18k9qCYdws,'|decrypt }}
+
+```
+
+
+## Globals
 
 This variables are accessible in all twig templates
 
-- document_title
-- document_description
-- document_keywords
-- document_links
-- document_styles
-- document_scripts
-- route
-- is_logged
+> document_title
+> document_description
+> document_keywords
+> document_links
+> document_styles
+> document_scripts
+> route
+> is_logged
 
-// Admin Only
+### Admin Only
 
-- user
+> user
 
-// Catalog Only
+### Catalog Only
 
-- customer
-- affiliate
-- is_affiliate_logged
-- cart
+> customer
+> affiliate
+> is_affiliate_logged
+> cart
 
 
 [![alt tag](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=92R8ND2JM9RBN)
