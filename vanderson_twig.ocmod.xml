@@ -28,7 +28,7 @@
 
             $paths[] = DIR_TEMPLATE;
 
-            $loader = new Twig_Loader_Filesystem($paths);
+            $loader = new Twig_Loader_Chain(array(new Twig_Loader_Filesystem($paths), new Twig_Loader_String()));
 
             $cache = false;
 
@@ -36,10 +36,16 @@
                 $cache = TWIG_CACHE;
             }
 
-            $this->registry->set('twig',new Twig_Environment($loader,array(
+            $twig = new Twig_Environment($loader,array(
                 'autoescape' => false,
-                'cache' => $cache
-            )));
+                'cache' => $cache,
+                'debug' => true
+            ));
+
+            $twig->addExtension(new Twig_Extension_Debug());
+            $twig->addExtension(new Twig_Extension_Opencart($this->registry));
+
+            $this->registry->set('twig', $twig);
         }
 
         extract($data);
@@ -68,5 +74,5 @@
                 <![CDATA[public function oldView($template, $data = array()) {]]>
             </add>
         </operation>
-    </file> 
+    </file>
 </modification>
