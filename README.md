@@ -42,7 +42,7 @@ Shortcut for $this->url->link();
     {{ link('product/product', { 'foo': 'bar' }, 'SSL') }}
 ```
 
-* param 'token' is automaticaly placed
+* param 'token' is automatically placed
 
 
 ## lang
