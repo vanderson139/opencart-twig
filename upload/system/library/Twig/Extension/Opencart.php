@@ -342,10 +342,16 @@ class Twig_Extension_Opencart extends Twig_Extension
         $config = $this->registry->get('config');
 
         if( ! $limit) {
-            $config->get('config_product_description_length');
+            $limit = $config->get('config_product_description_length');
         }
 
-        return utf8_substr(strip_tags(html_entity_decode($value, ENT_QUOTES, 'UTF-8')), 0, $limit) . $end;
+        $str = strip_tags(html_entity_decode($value, ENT_QUOTES, 'UTF-8'));
+
+        if(strlen($str) > $limit) {
+            $str = utf8_substr($str, 0, $limit) . $end;
+        }
+
+        return  $str;
     }
 
     /**
