@@ -12,6 +12,9 @@
             <add position="before">
                 <![CDATA[
     public function view($template, $data = array()) {
+    if(pathinfo($template, PATHINFO_EXTENSION) == 'tpl' ){
+$this->defaultview($template, $data);
+	}
         if( ! $this->registry->get('twig')) {
 
             $this->library('twig');
@@ -71,7 +74,7 @@
                 <![CDATA[public function view($template, $data = array()) {]]>
             </search>
             <add position="replace">
-                <![CDATA[public function oldView($template, $data = array()) {]]>
+                <![CDATA[public function defaultview($template, $data = array()) {]]>
             </add>
         </operation>
     </file>
