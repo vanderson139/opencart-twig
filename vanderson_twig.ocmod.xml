@@ -12,9 +12,7 @@
             <add position="before">
                 <![CDATA[
     public function view($template, $data = array()) {
-    if(pathinfo($template, PATHINFO_EXTENSION) == 'tpl' ){
-$this->defaultview($template, $data);
-	}
+
         if( ! $this->registry->get('twig')) {
 
             $this->library('twig');
