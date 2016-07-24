@@ -1,2 +1,2 @@
 <?php
-require_once('system/library/Twig/Autoloader.php');
+require_once(DIR_SYSTEM .'library/Twig/Autoloader.php');
