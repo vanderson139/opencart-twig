@@ -15,7 +15,9 @@
 
         if( ! $this->registry->get('twig')) {
 
-            $this->library('twig');
+            if(!class_exists('Twig_Environment')) {
+                require_once(DIR_SYSTEM . 'library' . DIRECTORY_SEPARATOR . 'twig.php');
+            }
 
             Twig_Autoloader::register();
 
